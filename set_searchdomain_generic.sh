@@ -1,14 +1,18 @@
 #!/bin/zsh
 
+# This script will set search domains on all active interfaces on a Mac.
+# - Replaces the examples domains in the $search_domains variable
+# - Edit LOGFILE varible to you own log file. If not needed, delete the 'logme' function and its callings.
+# - logme log function taken from one of Yohan460 scripts https://github.com/yohan460
+# - active_interfaces  function "inspired" from https://apple.stackexchange.com/questions/191879/how-to-find-the-currently-connected-network-service-from-the-command-line
+
+# Determine which shell is used for 
 shell=$(ps | grep `echo $$` | awk '{ print $4 }' | grep -v grep)
-echo $shell
-
-
 
 # Establishing the logging variables
 LOGFOLDER="/var/log"
 LOGFILE="${LOGFOLDER}/WS1_Sensors.log"
-search_domains=("example.local" "example.com" "domain3.co.il" "playtika.local") #use more if you wish
+search_domains=("example.local" "example.com" "domain3.co.il" ) #use more if you wish
 if [[ $shell != "zsh" ]]; then
 	search_domains=$(printf '%s\n' "${search_domains[*]}")
 fi
